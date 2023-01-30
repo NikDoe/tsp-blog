@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header,
+nav,
+footer {
+    background-color: lightgreen;
+    padding: 10px 0;
+}
+
+main {
+    flex-grow: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav li a,
+.post a {
+    color: #222222;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+}
+
+.link {
+    margin: 0 10px;
+}
+
+.post {
+    padding: 10px 0;
+    border-bottom: 1px solid #222222;
+    color: #222222;
+}
+
+.new-post__form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.new-post__form input,
+.new-post__form textarea {
+    margin-bottom: 20px;
+}
