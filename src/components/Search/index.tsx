@@ -1,11 +1,9 @@
-import { ChangeEvent, Dispatch, FC, FormEvent } from "react"
+import { ChangeEvent, FC, FormEvent, useContext } from "react"
+import DataContext from "../../context/DataContext"
 
-interface ISearchProps {
-	search: string
-	setSearch: Dispatch<React.SetStateAction<string>>
-}
+const Search: FC = () => {
+	const { search, setSearch } = useContext(DataContext)
 
-const Search: FC<ISearchProps> = ({ search, setSearch }) => {
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 	}

@@ -1,15 +1,30 @@
-import { FC } from "react"
-import { Link, useParams } from "react-router-dom"
-import { IPost } from "../../types"
+import { FC, useContext } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { api } from "../../api/postsApi"
+import DataContext from "../../context/DataContext"
 
-interface IPostPageProps {
-	posts: IPost[]
-	handleDelete: (id: number) => void
-}
-const PostPage: FC<IPostPageProps> = ({ posts, handleDelete }) => {
+const PostPage: FC = () => {
+	const { posts, setPosts } = useContext(DataContext)
 	const { id } = useParams()
+	const navigate = useNavigate()
 
 	const post = posts.find(post => post.id.toString() === id)
+
+	const handleDelete = async (id: number): Promise<void> => {
+		try {
+			const list = posts.filter(post => post.id !== id)
+			await api.delete(`posts/${id}`)
+			setPosts(list)
+			navigate("/")
+		} catch (error) {
+			if (error instanceof Error) {
+				console.log(error.message)
+			} else {
+				console.log("unexpected error")
+			}
+		}
+	}
+
 	return (
 		<main>
 			<article>

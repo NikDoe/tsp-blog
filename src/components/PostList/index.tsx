@@ -1,14 +1,13 @@
-import { FC } from "react"
-import { IPost } from "../../types"
+import { FC, useContext } from "react"
+import DataContext from "../../context/DataContext"
 import Post from "../Post"
 
-interface IPostListProps {
-	posts: IPost[]
-}
-const PostList: FC<IPostListProps> = ({ posts }) => {
+const PostList: FC = () => {
+	const { searchResult } = useContext(DataContext)
+
 	return (
 		<ul>
-			{posts.map(post => (
+			{searchResult.map(post => (
 				<Post
 					key={post.id}
 					post={post}

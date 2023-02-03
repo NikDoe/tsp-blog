@@ -1,13 +1,11 @@
-import { FC } from "react"
-import { IPost } from "../../types"
+import { FC, useContext } from "react"
+import DataContext from "../../context/DataContext"
 import PostList from "../PostList"
 
-interface IHomeProps {
-	posts: IPost[]
-}
+const Home: FC = () => {
+	const { searchResult } = useContext(DataContext)
 
-const Home: FC<IHomeProps> = ({ posts }) => {
-	return <main>{posts.length ? <PostList posts={posts} /> : <p>List post is empty 😒</p>}</main>
+	return <main>{searchResult.length ? <PostList /> : <p>List post is empty 😒</p>}</main>
 }
 
 export default Home
