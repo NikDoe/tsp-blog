@@ -9,7 +9,10 @@ const PostList: FC<IPostListProps> = ({ posts }) => {
 	return (
 		<ul>
 			{posts.map(post => (
-				<Post post={post} />
+				<Post
+					key={post.id}
+					post={post}
+				/>
 			))}
 		</ul>
 	)

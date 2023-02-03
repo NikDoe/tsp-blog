@@ -19,6 +19,9 @@ const PostPage: FC<IPostPageProps> = ({ posts, handleDelete }) => {
 						<p>{post.datetime}</p>
 						<p>{post.body}</p>
 						<button onClick={() => handleDelete(post.id)}>Delete Post</button>
+						<Link to={`/edit/${post.id}`}>
+							<button>Edit Post</button>
+						</Link>
 					</>
 				)}
 				{!post && (
