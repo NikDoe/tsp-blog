@@ -19,12 +19,15 @@ export interface PostsState {
 	posts: IPost[]
 	isLoading: boolean
 	error: null | string
+	search: string
 }
 
 export enum PostsReducerActionType {
 	FETCH_POSTS = "FETCH_POSTS",
 	FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS",
 	FETCH_POSTS_ERROR = "FETCH_POSTS_ERROR",
+	SET_SEARCH = "SET_SEARCH",
+	SEARCH_POSTS = "SEARCH_POSTS",
 }
 
 interface FetchPostsAction {
@@ -41,4 +44,19 @@ interface FetchPostsErrorAction {
 	payload: string
 }
 
-export type PostsActionType = FetchPostsAction | FetchPostsSuccessAction | FetchPostsErrorAction
+interface SetSearchAction {
+	type: PostsReducerActionType.SET_SEARCH
+	payload: string
+}
+
+interface SearchPostsAction {
+	type: PostsReducerActionType.SEARCH_POSTS
+	payload: IPost[]
+}
+
+export type PostsActionType =
+	| FetchPostsAction
+	| FetchPostsSuccessAction
+	| FetchPostsErrorAction
+	| SetSearchAction
+	| SearchPostsAction

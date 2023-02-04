@@ -1,10 +1,14 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react"
+import { useActions, useTypedSelector } from "../../hooks"
 const Search: FC = () => {
-	const [search, setSearch] = useState<string>("")
+	const { search } = useTypedSelector(state => state.posts)
+	const { setSearch } = useActions()
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 	}
+
+	console.log(search)
 
 	return (
 		<form onSubmit={handleFormSubmit}>

@@ -3,12 +3,12 @@ import { useActions, useTypedSelector } from "../../hooks"
 import PostList from "../PostList"
 
 const Home: FC = () => {
-	const { posts, isLoading, error } = useTypedSelector(state => state.posts)
+	const { isLoading, error, search } = useTypedSelector(state => state.posts)
 	const { fetchPosts } = useActions()
 
 	useEffect(() => {
 		fetchPosts()
-	}, [])
+	}, [search])
 
 	let content
 
