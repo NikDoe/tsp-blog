@@ -1,13 +1,13 @@
 import { format } from "date-fns"
-import { FC, useContext, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { api } from "../../api/postsApi"
-import DataContext from "../../context/DataContext"
+import { useTypedSelector } from "../../hooks"
 
 const EditPost: FC = () => {
 	const [editTitle, setEditTitle] = useState<string>("")
 	const [editBody, setEditBody] = useState<string>("")
-	const { posts, setPosts } = useContext(DataContext)
+	const { posts } = useTypedSelector(state => state.posts)
 	const { id } = useParams()
 	const post = posts.find(post => post.id.toString() === id)
 
@@ -25,7 +25,7 @@ const EditPost: FC = () => {
 			const datetime = format(new Date(), "MMMM dd, yyyy pp")
 			const updatePost = { id, title: editTitle, datetime, body: editBody }
 			const response = await api.put(`posts/${id}`, updatePost)
-			setPosts(posts.map(post => (post.id === id ? { ...response.data } : post)))
+			// setPosts(posts.map(post => (post.id === id ? { ...response.data } : post)))
 			setEditTitle("")
 			setEditBody("")
 			navigate("/")

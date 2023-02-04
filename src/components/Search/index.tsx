@@ -1,8 +1,6 @@
-import { ChangeEvent, FC, FormEvent, useContext } from "react"
-import DataContext from "../../context/DataContext"
-
+import { ChangeEvent, FC, FormEvent, useState } from "react"
 const Search: FC = () => {
-	const { search, setSearch } = useContext(DataContext)
+	const [search, setSearch] = useState<string>("")
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()

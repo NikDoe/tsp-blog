@@ -1,12 +1,12 @@
-import { ChangeEvent, Dispatch, FC, FormEvent, useContext, useState } from "react"
-import DataContext from "../../context/DataContext"
+import { ChangeEvent, FC, FormEvent, useState } from "react"
 import { format } from "date-fns"
 import { api } from "../../api/postsApi"
 import { IPost } from "../../types"
 import { useNavigate } from "react-router-dom"
+import { useTypedSelector } from "../../hooks"
 
 const NewPost: FC = () => {
-	const { posts, setPosts } = useContext(DataContext)
+	const { posts } = useTypedSelector(state => state.posts)
 	const [postTitle, setPostTitle] = useState<string>("")
 	const [postBody, setPostBody] = useState<string>("")
 
@@ -20,7 +20,7 @@ const NewPost: FC = () => {
 			const newPost = { id, title: postTitle, datetime, body: postBody }
 			const response = await api.post<IPost>("posts", newPost)
 			const allPosts = [...posts, response.data]
-			setPosts(allPosts)
+			// setPosts(allPosts)
 			setPostTitle("")
 			setPostBody("")
 			navigate("/")

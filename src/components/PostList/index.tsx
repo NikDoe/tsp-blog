@@ -1,19 +1,25 @@
-import { FC, useContext } from "react"
-import DataContext from "../../context/DataContext"
+import { FC } from "react"
+import { useTypedSelector } from "../../hooks"
 import Post from "../Post"
 
 const PostList: FC = () => {
-	const { searchResult } = useContext(DataContext)
+	const { posts } = useTypedSelector(state => state.posts)
 
 	return (
-		<ul>
-			{searchResult.map(post => (
-				<Post
-					key={post.id}
-					post={post}
-				/>
-			))}
-		</ul>
+		<>
+			{posts.length ? (
+				<ul>
+					{posts.map(post => (
+						<Post
+							key={post.id}
+							post={post}
+						/>
+					))}
+				</ul>
+			) : (
+				<p>posts list is empty 😒😒</p>
+			)}
+		</>
 	)
 }
 export default PostList

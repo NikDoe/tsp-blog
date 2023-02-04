@@ -1,11 +1,24 @@
-import { FC, useContext } from "react"
-import DataContext from "../../context/DataContext"
+import { FC, useEffect } from "react"
+import { useActions, useTypedSelector } from "../../hooks"
 import PostList from "../PostList"
 
 const Home: FC = () => {
-	const { searchResult } = useContext(DataContext)
+	const { posts, isLoading, error } = useTypedSelector(state => state.posts)
+	const { fetchPosts } = useActions()
 
-	return <main>{searchResult.length ? <PostList /> : <p>List post is empty 😒</p>}</main>
+	useEffect(() => {
+		fetchPosts()
+	}, [])
+
+	let content
+
+	if (isLoading) content = <p>loading posts...</p>
+
+	if (error) content = <p>{error}</p>
+
+	if (!isLoading && !error) content = <PostList />
+
+	return <main>{content}</main>
 }
 
 export default Home

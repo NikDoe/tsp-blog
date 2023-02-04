@@ -1,12 +1,13 @@
 import ReactDOM from "react-dom/client"
+import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
 import { BrowserRouter } from "react-router-dom"
 import App from "./App"
-import { DataProvider } from "./context/DataContext"
 import "./index.css"
+import { store } from "./store"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-	<DataProvider>
+	<Provider store={store}>
 		<BrowserRouter>
 			<Routes>
 				<Route
@@ -15,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 				/>
 			</Routes>
 		</BrowserRouter>
-	</DataProvider>
+	</Provider>
 )

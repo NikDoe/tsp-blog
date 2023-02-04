@@ -1,10 +1,10 @@
-import { FC, useContext } from "react"
+import { FC } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { api } from "../../api/postsApi"
-import DataContext from "../../context/DataContext"
+import { useTypedSelector } from "../../hooks"
 
 const PostPage: FC = () => {
-	const { posts, setPosts } = useContext(DataContext)
+	const { posts } = useTypedSelector(state => state.posts)
 	const { id } = useParams()
 	const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const PostPage: FC = () => {
 		try {
 			const list = posts.filter(post => post.id !== id)
 			await api.delete(`posts/${id}`)
-			setPosts(list)
+			// setPosts(list)
 			navigate("/")
 		} catch (error) {
 			if (error instanceof Error) {
