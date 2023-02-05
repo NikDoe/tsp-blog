@@ -14,7 +14,6 @@ const PostPage: FC = () => {
 		try {
 			const list = posts.filter(post => post.id !== id)
 			await api.delete(`posts/${id}`)
-			// setPosts(list)
 			navigate("/")
 		} catch (error) {
 			if (error instanceof Error) {

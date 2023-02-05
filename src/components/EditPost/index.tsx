@@ -25,7 +25,6 @@ const EditPost: FC = () => {
 			const datetime = format(new Date(), "MMMM dd, yyyy pp")
 			const updatePost = { id, title: editTitle, datetime, body: editBody }
 			const response = await api.put(`posts/${id}`, updatePost)
-			// setPosts(posts.map(post => (post.id === id ? { ...response.data } : post)))
 			setEditTitle("")
 			setEditBody("")
 			navigate("/")
