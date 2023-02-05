@@ -8,8 +8,6 @@ const Search: FC = () => {
 		e.preventDefault()
 	}
 
-	console.log(search)
-
 	return (
 		<form onSubmit={handleFormSubmit}>
 			<input

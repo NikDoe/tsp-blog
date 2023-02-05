@@ -2,14 +2,21 @@ import { Dispatch } from "redux"
 import { api } from "../../api/postsApi"
 import { IPost, PostsActionType, PostsReducerActionType } from "../../types"
 
-export const fetchPosts = () => {
+export const fetchPosts = (search: string) => {
 	return async (dispatch: Dispatch<PostsActionType>) => {
 		try {
 			dispatch({ type: PostsReducerActionType.FETCH_POSTS })
-			const response = await api.get("posts")
+			const { data } = await api.get<IPost[]>("posts")
+			const result = data
+				.filter(
+					post =>
+						post.title.toLowerCase().includes(search.toLowerCase()) ||
+						post.body.toLowerCase().includes(search.toLowerCase())
+				)
+				.reverse()
 			dispatch({
 				type: PostsReducerActionType.FETCH_POSTS_SUCCESS,
-				payload: response.data,
+				payload: result,
 			})
 		} catch (error) {
 			dispatch({
@@ -17,6 +24,14 @@ export const fetchPosts = () => {
 				payload: "error fetching posts",
 			})
 		}
+	}
+}
+
+export const addNewPost = (post: IPost) => {
+	return async (dispatch: Dispatch<PostsActionType>) => {
+		const { data } = await api.post("posts", post)
+
+		dispatch({ type: PostsReducerActionType.ADD_NEW_POST, payload: data })
 	}
 }
 

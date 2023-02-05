@@ -16,18 +16,14 @@ export const postsReducer = (state = initialState, action: PostsActionType): Pos
 				...state,
 				isLoading: false,
 				error: null,
-				posts: action.payload
-					.filter(
-						post =>
-							post.title.toLowerCase().includes(state.search.toLowerCase()) ||
-							post.body.toLowerCase().includes(state.search.toLowerCase())
-					)
-					.reverse(),
+				posts: action.payload,
 			}
 		case PostsReducerActionType.FETCH_POSTS_ERROR:
 			return { ...state, isLoading: false, error: action.payload, posts: [] }
 		case PostsReducerActionType.SET_SEARCH:
 			return { ...state, search: action.payload }
+		case PostsReducerActionType.ADD_NEW_POST:
+			return { ...state, posts: [...state.posts, action.payload] }
 		default:
 			return state
 	}

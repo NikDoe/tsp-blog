@@ -3,24 +3,24 @@ import { format } from "date-fns"
 import { api } from "../../api/postsApi"
 import { IPost } from "../../types"
 import { useNavigate } from "react-router-dom"
-import { useTypedSelector } from "../../hooks"
+import { useActions, useTypedSelector } from "../../hooks"
 
 const NewPost: FC = () => {
 	const { posts } = useTypedSelector(state => state.posts)
 	const [postTitle, setPostTitle] = useState<string>("")
 	const [postBody, setPostBody] = useState<string>("")
 
+	const { addNewPost } = useActions()
+
 	const navigate = useNavigate()
 
 	const handleAddNewPost = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
 		try {
 			e.preventDefault()
-			const id = posts.length ? posts[posts.length - 1].id + 1 : 1
+			const id = posts.length ? Math.max(...posts.map(post => post.id)) + 1 : 1
 			const datetime = format(new Date(), "MMMM dd, yyyy pp")
 			const newPost = { id, title: postTitle, datetime, body: postBody }
-			const response = await api.post<IPost>("posts", newPost)
-			const allPosts = [...posts, response.data]
-			// setPosts(allPosts)
+			addNewPost(newPost)
 			setPostTitle("")
 			setPostBody("")
 			navigate("/")

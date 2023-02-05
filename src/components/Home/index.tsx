@@ -7,7 +7,7 @@ const Home: FC = () => {
 	const { fetchPosts } = useActions()
 
 	useEffect(() => {
-		fetchPosts()
+		fetchPosts(search)
 	}, [search])
 
 	let content

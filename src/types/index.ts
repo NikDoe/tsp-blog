@@ -27,7 +27,7 @@ export enum PostsReducerActionType {
 	FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS",
 	FETCH_POSTS_ERROR = "FETCH_POSTS_ERROR",
 	SET_SEARCH = "SET_SEARCH",
-	SEARCH_POSTS = "SEARCH_POSTS",
+	ADD_NEW_POST = "ADD_NEW_POST",
 }
 
 interface FetchPostsAction {
@@ -49,9 +49,9 @@ interface SetSearchAction {
 	payload: string
 }
 
-interface SearchPostsAction {
-	type: PostsReducerActionType.SEARCH_POSTS
-	payload: IPost[]
+interface AddNewPostsAction {
+	type: PostsReducerActionType.ADD_NEW_POST
+	payload: IPost
 }
 
 export type PostsActionType =
@@ -59,4 +59,4 @@ export type PostsActionType =
 	| FetchPostsSuccessAction
 	| FetchPostsErrorAction
 	| SetSearchAction
-	| SearchPostsAction
+	| AddNewPostsAction
