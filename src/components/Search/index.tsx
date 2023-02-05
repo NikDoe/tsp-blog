@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react"
+import { ChangeEvent, FC, FormEvent } from "react"
 import { useActions, useTypedSelector } from "../../hooks"
 const Search: FC = () => {
 	const { search } = useTypedSelector(state => state.posts)
